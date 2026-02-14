@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>💖 EXTREME APOKALIPSA MIŁOŚCI 9001 💖</title>
+<title>💖 EXTREME APOKALIPSA MIŁOŚCI 9002 💖</title>
 
 <style>
 body {
@@ -53,11 +53,11 @@ button:hover{transform:scale(1.2);}
 <p>System stabilności emocjonalnej: ZAWIESZONY</p>
 
 <button onclick="startApocalypse()">URUCHOM MIŁOŚĆ</button>
-<button onclick="kissScreen()">💋 POCAŁUJ EKRAN 💋</button>
 <button onclick="moreChaos()">🎉 WIĘCEJ KOTKÓW 🎉</button>
 <button onclick="megaChaos()">🔥 CHAOS MEMÓW 🔥</button>
 <button onclick="cosmicKiss()">🌌 BUZIAK W KOSMOS 🌌</button>
 <button onclick="magicHearts()">🌈 MAGICZNE SERDUSZKA 🌈</button>
+<button onclick="kissScreen()">💋 POCAŁUJ EKRAN 💋</button>
 
 <div id="loveZone" class="hidden">
     <div class="bigLove">KOCHAM CIĘ TAK BARDZO 💖💖💖</div>
@@ -69,23 +69,26 @@ button:hover{transform:scale(1.2);}
     <div id="loveCounter">POZIOM MIŁOŚCI: 0%</div>
 </div>
 
+<!-- Dźwięki -->
 <audio id="kissSound"><source src="https://www.soundjay.com/human/kiss-01.mp3" type="audio/mpeg"></audio>
 <audio id="explosionSound"><source src="https://www.soundjay.com/explosion/explosion-01.mp3" type="audio/mpeg"></audio>
 <audio id="cosmicSound"><source src="https://www.soundjay.com/space/laser-01.mp3" type="audio/mpeg"></audio>
+<audio id="boomSound"><source src="https://www.soundjay.com/explosion/explosion-01.mp3" type="audio/mpeg"></audio>
 
 <script>
 let counter=0;
 let interval;
 
+// START: pokazuje tylko napisy i licznik, bez emotek
 function startApocalypse(){
-    document.getElementById("loveZone").classList.remove("hidden"); // tylko pokazuje napisy i licznik
+    document.getElementById("loveZone").classList.remove("hidden");
     interval = setInterval(()=>{
         counter += 999999;
         document.getElementById("loveCounter").innerText = "POZIOM MIŁOŚCI: " + counter + "%";
     }, 200);
-    // NIE tworzymy emotek ani GIF-ów
 }
 
+// GENERATORY ELEMENTÓW
 function createHearts(n){
     for(let i=0;i<n;i++){
         let heart=document.createElement("div");
@@ -159,6 +162,7 @@ function createConfetti(n){
     }
 }
 
+// LOSOWY RUCH
 function randomMotion(el){
     let x=Math.random()*200-100;
     let y=Math.random()*200-100;
@@ -166,12 +170,40 @@ function randomMotion(el){
                {duration:4000+Math.random()*4000,iterations:Infinity,direction:"alternate"});
 }
 
-function kissScreen(){document.getElementById("kissSound").play();alert("BUZIAK DLA NAJSŁODSZEGO CHŁOPAKA 💋💋💋");}
-function moreChaos(){createCats(30); createMemes(20); createConfetti(30); createGifCats(10);}
-function megaChaos(){document.getElementById("explosionSound").play();createHearts(100); createCats(30); createMemes(30); createConfetti(50); createGifCats(20);}
-function cosmicKiss(){document.getElementById("cosmicSound").play();alert("BUZIAK WYSŁANY W KOSMOS 🌌💖");}
-function magicHearts(){createHearts(50);}
-</script>
+// EFEKT WYBUCHU PO 3 SEKUNDACH
+function explodeLove() {
+    document.getElementById("boomSound").play();
+    const hearts = document.querySelectorAll(".heart");
+    const memes = document.querySelectorAll(".meme");
+    const gifs = document.querySelectorAll(".gifCat");
+    const all = [...hearts, ...memes, ...gifs];
 
+    all.forEach(el => {
+        let x = (Math.random() - 0.5) * 800;
+        let y = (Math.random() - 0.5) * 800;
+        el.animate([
+            {transform: "translate(0,0)", opacity:1},
+            {transform: `translate(${x}px, ${y}px) scale(2) rotate(${Math.random()*360}deg)`, opacity:0}
+        ], {duration:1000, easing:"ease-out"});
+        setTimeout(()=>el.remove(), 1000);
+    });
+}
+
+// PRZYCISKI FUNKCJE
+function moreChaos(){
+    createHearts(30); createMemes(20); createGifCats(10);
+    setTimeout(explodeLove, 3000);
+}
+
+function megaChaos(){
+    createHearts(100); createCats(30); createMemes(30); createConfetti(50); createGifCats(20);
+    setTimeout(explodeLove, 3000);
+}
+
+function magicHearts(){ createHearts(50); setTimeout(explodeLove, 3000); }
+function cosmicKiss(){ document.getElementById("cosmicSound").play(); alert("BUZIAK WYSŁANY W KOSMOS 🌌💖"); }
+function kissScreen(){ document.getElementById("kissSound").play(); alert("BUZIAK DLA NAJSŁODSZEGO CHŁOPAKA 💋💋💋"); }
+
+</script>
 </body>
 </html>
