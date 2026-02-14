@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>💖 EXTREME APOKALIPSA MIŁOŚCI 9009 💖</title>
+<title>💖 EXTREME APOKALIPSA MIŁOŚCI 9010 💖</title>
 
 <style>
 body {
@@ -30,10 +30,9 @@ button{
 button:hover{transform:scale(1.2);}
 .hidden{display:none;}
 .flyingObj{position:fixed; transform: scale(0.8);}
-.heart,.gifCat,.maklowicz{position:fixed;}
+.heart,.gifCat{position:fixed;}
 .heart{font-size:28px;}
 .gifCat{width:80px;height:80px;}
-.maklowicz{width:80px;height:80px;}
 .bigLove{
     font-size:40px;
     margin-top:20px;
@@ -47,7 +46,7 @@ button:hover{transform:scale(1.2);}
     .bigLove { font-size: 24px; margin-top: 10px; }
     #loveCounter { font-size: 20px; }
     #buttonsContainer button { padding: 8px 12px; font-size: 14px; flex: 1 1 45%; min-width: 100px; margin: 5px; }
-    .gifCat, .maklowicz { width: 50px; height: 50px; }
+    .gifCat { width: 50px; height: 50px; }
 }
 </style>
 </head>
@@ -59,7 +58,6 @@ button:hover{transform:scale(1.2);}
 <div id="buttonsContainer">
     <button onclick="startApocalypse()">URUCHOM MIŁOŚĆ</button>
     <button onclick="moreChaos()">🎉 WIĘCEJ KOTKÓW 🎉</button>
-    <button onclick="megaChaos()">🔥 CHAOS MEMÓW 🔥</button>
     <button onclick="cosmicKiss()">🌌 BUZIAK W KOSMOS 🌌</button>
     <button onclick="magicHearts()">🌈 MAGICZNE SERDUSZKA 🌈</button>
     <button onclick="kissScreen()">💋 POCAŁUJ EKRAN 💋</button>
@@ -107,7 +105,7 @@ function startApocalypse(){
 }
 
 function elementCount() {
-    return document.querySelectorAll(".heart, .gifCat, .maklowicz").length;
+    return document.querySelectorAll(".heart, .gifCat").length;
 }
 
 // KOTKI - działające GIF-y z Giphy
@@ -118,7 +116,7 @@ const catGifUrls=[
     "https://media.giphy.com/media/ICOgUNjpvO0PC/giphy.gif"
 ];
 
-function createCatMemes(n=5){
+function createCatMemes(n=15){
     if(elementCount() + n > MAX_ELEMENTS) n = MAX_ELEMENTS - elementCount();
     for(let i=0;i<n;i++){
         let gif=document.createElement("img");
@@ -128,26 +126,6 @@ function createCatMemes(n=5){
         gif.style.top=Math.random()*80+"vh";
         randomMotion(gif);
         document.body.appendChild(gif);
-    }
-}
-
-// MAKŁOWICZ - stabilne GIF-y z Tenor
-const maklowiczUrls=[
-    "https://media.tenor.com/7AhkS3Dq9N0AAAAC/robert-maklowicz.gif",
-    "https://media.tenor.com/xM6w5s7rN8YAAAAC/robert-maklowicz-smile.gif",
-    "https://media.tenor.com/fybZb8FX2lAAAAAC/robert-maklowicz.gif"
-];
-
-function createMaklowiczMemes(n=5){
-    if(elementCount() + n > MAX_ELEMENTS) n = MAX_ELEMENTS - elementCount();
-    for(let i=0;i<n;i++){
-        let m=document.createElement("img");
-        m.src=maklowiczUrls[Math.floor(Math.random()*maklowiczUrls.length)];
-        m.classList.add("maklowicz","flyingObj");
-        m.style.left=Math.random()*90+"vw";
-        m.style.top=Math.random()*80+"vh";
-        randomMotion(m);
-        document.body.appendChild(m);
     }
 }
 
@@ -162,7 +140,7 @@ function randomMotion(el){
 // WYBUCH PO 2 SEKUNDACH
 function explodeLove() {
     document.getElementById("boomSound").play();
-    const all = document.querySelectorAll(".heart, .gifCat, .maklowicz");
+    const all = document.querySelectorAll(".heart, .gifCat");
     all.forEach(el=>{
         let x=(Math.random()-0.5)*800;
         let y=(Math.random()-0.5)*800;
@@ -180,15 +158,8 @@ function moreChaos(){ // tylko kotki
     setTimeout(explodeLove,2000);
 }
 
-function megaChaos(){ // tylko Makłowicz
-    startSaxophone();
-    document.getElementById("meowSound").play();
-    createMaklowiczMemes();
-    setTimeout(explodeLove,2000);
-}
-
 // SERDUSZKA
-function createHearts(n=5){
+function createHearts(n=15){
     if(elementCount() + n > MAX_ELEMENTS) n = MAX_ELEMENTS - elementCount();
     for(let i=0;i<n;i++){
         let heart=document.createElement("div");
