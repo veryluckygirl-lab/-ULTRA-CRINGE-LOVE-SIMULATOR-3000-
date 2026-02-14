@@ -20,7 +20,7 @@ h1,h2,p {animation:blink 1s infinite;}
 button{margin:10px;padding:18px 35px;font-size:20px;background:white;color:hotpink;border:4px dashed deeppink;border-radius:50px;cursor:pointer;transition:transform 0.2s;}
 button:hover{transform:scale(1.2);}
 .hidden{display:none;}
-.heart,.cat,.meme,.confetti,.gifCat{position:fixed;top:0;animation:fall linear infinite;}
+.heart,.cat,.meme,.confetti,.gifCat{position:fixed;animation:fall linear infinite;}
 .heart{font-size:28px;}
 .cat{font-size:48px;}
 .meme{font-size:64px;}
@@ -45,8 +45,10 @@ button:hover{transform:scale(1.2);}
 
 <div id="loveZone" class="hidden">
     <div class="bigLove">KOCHAM CIĘ TAK BARDZO 💖💖💖</div>
-    <p style="font-size:22px;">NIE MOGĘ BEZ CIEBIE ŻYĆ 😭</p>
-    <p style="font-size:22px;">JESTEŚ MOIM MISIEM, SŁONECZKIEM, KOTKIEM, ANIOŁKIEM I NAJWIĘKSZYM SKARBEM 💘</p>
+    <p style="font-size:22px;">
+        JESTEŚ MOIM MISIEM, SŁONECZKIEM, KOTKIEM,
+        ANIOŁKIEM I NAJWIĘKSZYM SKARBEM 💘
+    </p>
     <h2>👑 NAJLEPSZY CHŁOPAK WE WSZECHŚWIECIE 👑</h2>
     <div id="loveCounter">POZIOM MIŁOŚCI: 0%</div>
 </div>
@@ -61,7 +63,10 @@ let interval;
 
 function startApocalypse(){
     document.getElementById("loveZone").classList.remove("hidden");
-    interval=setInterval(()=>{counter+=999999;document.getElementById("loveCounter").innerText="POZIOM MIŁOŚCI: "+counter+"%";},200);
+    interval=setInterval(()=>{
+        counter+=999999;
+        document.getElementById("loveCounter").innerText="POZIOM MIŁOŚCI: "+counter+"%";
+    },200);
     createHearts(150); createCats(50); createMemes(25); createConfetti(50); createGifCats(20);
 }
 
@@ -70,7 +75,8 @@ function createHearts(n){
         let heart=document.createElement("div");
         heart.classList.add("heart");
         heart.innerHTML="💖";
-        heart.style.left=Math.random()*100+"vw";
+        heart.style.left=Math.random()*90+"vw";
+        heart.style.top=Math.random()*80+"vh";
         heart.style.color=`hsl(${Math.random()*360},100%,70%)`;
         heart.style.animationDuration=(2+Math.random()*4)+"s";
         randomMotion(heart);
@@ -84,7 +90,8 @@ function createCats(n){
         let cat=document.createElement("div");
         cat.classList.add("cat");
         cat.innerHTML=cats[Math.floor(Math.random()*cats.length)];
-        cat.style.left=Math.random()*100+"vw";
+        cat.style.left=Math.random()*90+"vw";
+        cat.style.top=Math.random()*80+"vh";
         cat.style.animationDuration=(3+Math.random()*4)+"s";
         randomMotion(cat);
         document.body.appendChild(cat);
@@ -97,7 +104,8 @@ function createMemes(n){
         let meme=document.createElement("div");
         meme.classList.add("meme");
         meme.innerHTML=memes[Math.floor(Math.random()*memes.length)];
-        meme.style.left=Math.random()*100+"vw";
+        meme.style.left=Math.random()*90+"vw";
+        meme.style.top=Math.random()*80+"vh";
         meme.style.animationDuration=(3+Math.random()*5)+"s";
         randomMotion(meme);
         document.body.appendChild(meme);
@@ -115,7 +123,8 @@ function createGifCats(n){
         let gif=document.createElement("img");
         gif.src=gifUrls[Math.floor(Math.random()*gifUrls.length)];
         gif.classList.add("gifCat");
-        gif.style.left=Math.random()*100+"vw";
+        gif.style.left=Math.random()*90+"vw";
+        gif.style.top=Math.random()*80+"vh";
         randomMotion(gif);
         document.body.appendChild(gif);
     }
@@ -126,6 +135,7 @@ function createConfetti(n){
         let conf=document.createElement("div");
         conf.classList.add("confetti");
         conf.style.left=Math.random()*100+"vw";
+        conf.style.top=Math.random()*80+"vh";
         conf.style.backgroundColor=`hsl(${Math.random()*360},100%,50%)`;
         conf.style.animationDuration=(2+Math.random()*4)+"s";
         randomMotion(conf);
@@ -136,7 +146,8 @@ function createConfetti(n){
 function randomMotion(el){
     let x=Math.random()*200-100;
     let y=Math.random()*200-100;
-    el.animate([{transform:`translate(0px,0px)`},{transform:`translate(${x}px,${y}px)`}],{duration:4000+Math.random()*4000,iterations:Infinity,direction:"alternate"});
+    el.animate([{transform:`translate(0px,0px)`},{transform:`translate(${x}px,${y}px)`}],
+               {duration:4000+Math.random()*4000,iterations:Infinity,direction:"alternate"});
 }
 
 function kissScreen(){document.getElementById("kissSound").play();alert("BUZIAK DLA NAJSŁODSZEGO CHŁOPAKA 💋💋💋");}
@@ -148,4 +159,5 @@ function magicHearts(){createHearts(50);}
 
 </body>
 </html>
+
 
