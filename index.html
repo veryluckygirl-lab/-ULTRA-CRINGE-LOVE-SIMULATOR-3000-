@@ -60,15 +60,16 @@ button:hover{transform:scale(1.2);}
 <script>
 let counter=0;
 let interval;
-
+    
 function startApocalypse(){
-    document.getElementById("loveZone").classList.remove("hidden");
-    interval=setInterval(()=>{
-        counter+=999999;
-        document.getElementById("loveCounter").innerText="POZIOM MIŁOŚCI: "+counter+"%";
-    },200);
-    createHearts(150); createCats(50); createMemes(25); createConfetti(50); createGifCats(20);
+    document.getElementById("loveZone").classList.remove("hidden"); // pokaż napisy i licznik
+    interval = setInterval(()=>{
+        counter += 999999;
+        document.getElementById("loveCounter").innerText = "POZIOM MIŁOŚCI: " + counter + "%";
+    }, 200);
+    // UWAGA: NIE tworzymy żadnych emotek ani GIF-ów
 }
+
 
 function createHearts(n){
     for(let i=0;i<n;i++){
