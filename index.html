@@ -3,160 +3,149 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>💖 TOTALNA APOKALIPSA MIŁOŚCI 💖</title>
+<title>💖 EXTREME APOKALIPSA MIŁOŚCI 9001 💖</title>
 
 <style>
 body {
-    margin: 0;
-    overflow: hidden;
-    background: linear-gradient(45deg, hotpink, deeppink, violet, magenta);
-    background-size: 400% 400%;
-    animation: bgMove 5s infinite alternate;
-    font-family: "Comic Sans MS", cursive;
-    text-align: center;
-    color: white;
+    margin:0; overflow:hidden;
+    font-family:"Comic Sans MS", cursive;
+    text-align:center; color:white;
+    background: linear-gradient(45deg, hotpink, deeppink, violet, magenta, cyan, yellow);
+    background-size: 600% 600%;
+    animation: rainbowBG 5s infinite alternate;
 }
-
-@keyframes bgMove {
-    0% { background-position: left; }
-    100% { background-position: right; }
-}
-
-h1 {
-    margin-top: 40px;
-    font-size: 32px;
-    animation: blink 1s infinite;
-}
-
-@keyframes blink {
-    50% { opacity: 0.3; }
-}
-
-button {
-    margin: 15px;
-    padding: 18px 35px;
-    font-size: 20px;
-    background: white;
-    color: hotpink;
-    border: 4px dashed deeppink;
-    border-radius: 50px;
-    cursor: pointer;
-}
-
-.hidden {
-    display: none;
-}
-
-.heart, .cat {
-    position: fixed;
-    top: -50px;
-    font-size: 28px;
-    animation: fall linear infinite;
-}
-
-@keyframes fall {
-    to { transform: translateY(110vh); }
-}
-
-.bigLove {
-    font-size: 36px;
-    margin-top: 20px;
-    animation: pulse 1s infinite;
-}
-
-@keyframes pulse {
-    50% { transform: scale(1.2); }
-}
-
-#loveCounter {
-    font-size: 26px;
-    margin-top: 20px;
-}
-
-.cat {
-    font-size: 48px;
-    animation-duration: 4s;
-}
+@keyframes rainbowBG {0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
+h1,h2,p {animation:blink 1s infinite;}
+@keyframes blink{50%{opacity:0.4;}}
+button{margin:10px;padding:18px 35px;font-size:20px;background:white;color:hotpink;border:4px dashed deeppink;border-radius:50px;cursor:pointer;transition:transform 0.2s;}
+button:hover{transform:scale(1.2);}
+.hidden{display:none;}
+.heart,.cat,.meme,.confetti,.gifCat{position:fixed;top:0;animation:fall linear infinite;}
+.heart{font-size:28px;}
+.cat{font-size:48px;}
+.meme{font-size:64px;}
+.confetti{width:10px;height:10px;background-color:yellow;}
+.gifCat{width:80px;height:80px;}
+.bigLove{font-size:40px;margin-top:20px;animation:pulse 1s infinite;}
+@keyframes pulse{50%{transform:scale(1.3);}}
+#loveCounter{font-size:28px;margin-top:20px;}
 </style>
 </head>
 
 <body>
-
-<h1>🚨 UWAGA 🚨<br>MIŁOŚĆ PRZEKROCZYŁA DOPUSZCZALNE NORMY</h1>
+<h1>🚨 TOTALNA APKALIPSA MIŁOŚCI 🚨</h1>
 <p>System stabilności emocjonalnej: ZAWIESZONY</p>
 
-<button onclick="startApocalypse()">URUCHOM TOTALNĄ MIŁOŚĆ</button>
+<button onclick="startApocalypse()">URUCHOM MIŁOŚĆ</button>
 <button onclick="kissScreen()">💋 POCAŁUJ EKRAN 💋</button>
+<button onclick="moreChaos()">🎉 WIĘCEJ KOTKÓW 🎉</button>
+<button onclick="megaChaos()">🔥 CHAOS MEMÓW 🔥</button>
+<button onclick="cosmicKiss()">🌌 BUZIAK W KOSMOS 🌌</button>
+<button onclick="magicHearts()">🌈 MAGICZNE SERDUSZKA 🌈</button>
 
 <div id="loveZone" class="hidden">
-
-    <div class="bigLove">
-        KOCHAM CIĘ TAK BARDZO  
-        ŻE TO JUŻ JEST NIELEGALNE 💖💖💖
-    </div>
-
-    <p style="font-size:22px;">
-        NIE MOGĘ BEZ CIEBIE ŻYĆ 😭
-    </p>
-
-    <p style="font-size:22px;">
-        JESTEŚ MOIM MISIEM, SŁONECZKIEM, KOTKIEM,
-        ANIOŁKIEM I NAJWIĘKSZYM SKARBEM 💘
-    </p>
-
+    <div class="bigLove">KOCHAM CIĘ TAK BARDZO 💖💖💖</div>
+    <p style="font-size:22px;">NIE MOGĘ BEZ CIEBIE ŻYĆ 😭</p>
+    <p style="font-size:22px;">JESTEŚ MOIM MISIEM, SŁONECZKIEM, KOTKIEM, ANIOŁKIEM I NAJWIĘKSZYM SKARBEM 💘</p>
     <h2>👑 NAJLEPSZY CHŁOPAK WE WSZECHŚWIECIE 👑</h2>
-
-    <div id="loveCounter">
-        POZIOM MIŁOŚCI: 0%
-    </div>
-
+    <div id="loveCounter">POZIOM MIŁOŚCI: 0%</div>
 </div>
 
-<audio id="kissSound">
-<source src="https://www.soundjay.com/human/kiss-01.mp3" type="audio/mpeg">
-</audio>
+<audio id="kissSound"><source src="https://www.soundjay.com/human/kiss-01.mp3" type="audio/mpeg"></audio>
+<audio id="explosionSound"><source src="https://www.soundjay.com/explosion/explosion-01.mp3" type="audio/mpeg"></audio>
+<audio id="cosmicSound"><source src="https://www.soundjay.com/space/laser-01.mp3" type="audio/mpeg"></audio>
 
 <script>
-let counter = 0;
+let counter=0;
 let interval;
 
-function startApocalypse() {
+function startApocalypse(){
     document.getElementById("loveZone").classList.remove("hidden");
+    interval=setInterval(()=>{counter+=999999;document.getElementById("loveCounter").innerText="POZIOM MIŁOŚCI: "+counter+"%";},200);
+    createHearts(150); createCats(50); createMemes(25); createConfetti(50); createGifCats(20);
+}
 
-    // licznik miłości
-    interval = setInterval(() => {
-        counter += 999999;
-        document.getElementById("loveCounter").innerText =
-            "POZIOM MIŁOŚCI: " + counter + "%";
-    }, 200);
-
-    // spadające serduszka
-    for (let i = 0; i < 100; i++) {
-        let heart = document.createElement("div");
+function createHearts(n){
+    for(let i=0;i<n;i++){
+        let heart=document.createElement("div");
         heart.classList.add("heart");
-        heart.innerHTML = "💖";
-        heart.style.left = Math.random() * 100 + "vw";
-        heart.style.animationDuration = (2 + Math.random() * 3) + "s";
+        heart.innerHTML="💖";
+        heart.style.left=Math.random()*100+"vw";
+        heart.style.color=`hsl(${Math.random()*360},100%,70%)`;
+        heart.style.animationDuration=(2+Math.random()*4)+"s";
+        randomMotion(heart);
         document.body.appendChild(heart);
     }
+}
 
-    // latające kotki / memy
-    const cats = ["😺", "😻", "😹", "🐱"];
-    for (let i = 0; i < 30; i++) {
-        let cat = document.createElement("div");
+function createCats(n){
+    const cats=["😺","😻","😹","🐱"];
+    for(let i=0;i<n;i++){
+        let cat=document.createElement("div");
         cat.classList.add("cat");
-        cat.innerHTML = cats[Math.floor(Math.random() * cats.length)];
-        cat.style.left = Math.random() * 100 + "vw";
-        cat.style.animationDuration = (3 + Math.random() * 4) + "s";
+        cat.innerHTML=cats[Math.floor(Math.random()*cats.length)];
+        cat.style.left=Math.random()*100+"vw";
+        cat.style.animationDuration=(3+Math.random()*4)+"s";
+        randomMotion(cat);
         document.body.appendChild(cat);
     }
 }
 
-function kissScreen() {
-    document.getElementById("kissSound").play();
-    alert("BUZIAK DLA NAJSŁODSZEGO CHŁOPAKA 💋💋💋");
+function createMemes(n){
+    const memes=["🐱‍👤","🐱‍💻","🐱‍🚀","😹💥"];
+    for(let i=0;i<n;i++){
+        let meme=document.createElement("div");
+        meme.classList.add("meme");
+        meme.innerHTML=memes[Math.floor(Math.random()*memes.length)];
+        meme.style.left=Math.random()*100+"vw";
+        meme.style.animationDuration=(3+Math.random()*5)+"s";
+        randomMotion(meme);
+        document.body.appendChild(meme);
+    }
 }
+
+function createGifCats(n){
+    const gifUrls=[
+        "https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif",
+        "https://media.giphy.com/media/mlvseq9yvZhba/giphy.gif",
+        "https://media.giphy.com/media/13CoXDiaCcCoyk/giphy.gif",
+        "https://media.giphy.com/media/12PA1eI8FBqEBa/giphy.gif"
+    ];
+    for(let i=0;i<n;i++){
+        let gif=document.createElement("img");
+        gif.src=gifUrls[Math.floor(Math.random()*gifUrls.length)];
+        gif.classList.add("gifCat");
+        gif.style.left=Math.random()*100+"vw";
+        randomMotion(gif);
+        document.body.appendChild(gif);
+    }
+}
+
+function createConfetti(n){
+    for(let i=0;i<n;i++){
+        let conf=document.createElement("div");
+        conf.classList.add("confetti");
+        conf.style.left=Math.random()*100+"vw";
+        conf.style.backgroundColor=`hsl(${Math.random()*360},100%,50%)`;
+        conf.style.animationDuration=(2+Math.random()*4)+"s";
+        randomMotion(conf);
+        document.body.appendChild(conf);
+    }
+}
+
+function randomMotion(el){
+    let x=Math.random()*200-100;
+    let y=Math.random()*200-100;
+    el.animate([{transform:`translate(0px,0px)`},{transform:`translate(${x}px,${y}px)`}],{duration:4000+Math.random()*4000,iterations:Infinity,direction:"alternate"});
+}
+
+function kissScreen(){document.getElementById("kissSound").play();alert("BUZIAK DLA NAJSŁODSZEGO CHŁOPAKA 💋💋💋");}
+function moreChaos(){createCats(30); createMemes(20); createConfetti(30); createGifCats(10);}
+function megaChaos(){document.getElementById("explosionSound").play();createHearts(100); createCats(30); createMemes(30); createConfetti(50); createGifCats(20);}
+function cosmicKiss(){document.getElementById("cosmicSound").play();alert("BUZIAK WYSŁANY W KOSMOS 🌌💖");}
+function magicHearts(){createHearts(50);}
 </script>
 
 </body>
 </html>
+
