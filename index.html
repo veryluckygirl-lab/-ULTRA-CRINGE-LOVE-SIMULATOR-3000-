@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>💖 EXTREME APOKALIPSA MIŁOŚCI 9007 💖</title>
+<title>💖 EXTREME APOKALIPSA MIŁOŚCI 9008 💖</title>
 
 <style>
 body {
@@ -30,13 +30,10 @@ button{
 button:hover{transform:scale(1.2);}
 .hidden{display:none;}
 .flyingObj{position:fixed; transform: scale(0.8);}
-.heart,.cat,.meme,.confetti,.gifCat,.maklowicz,.crazyCat{position:fixed;}
+.heart,.gifCat,.maklowicz{position:fixed;}
 .heart{font-size:28px;}
-.cat{font-size:48px;}
-.meme{font-size:64px;}
-.maklowicz,.crazyCat{width:80px;height:80px;}
-.confetti{width:10px;height:10px;background-color:yellow;}
 .gifCat{width:80px;height:80px;}
+.maklowicz{width:80px;height:80px;}
 .bigLove{
     font-size:40px;
     margin-top:20px;
@@ -46,15 +43,11 @@ button:hover{transform:scale(1.2);}
 }
 @keyframes pulse{50%{transform:scale(1.3);}}
 #loveCounter{font-size:28px;margin-top:20px;}
-
-/* Responsywne style dla telefonów */
 @media (max-width: 600px) {
     .bigLove { font-size: 24px; margin-top: 10px; }
     #loveCounter { font-size: 20px; }
-    p { font-size: 16px; }
-    h2 { font-size: 18px; }
     #buttonsContainer button { padding: 8px 12px; font-size: 14px; flex: 1 1 45%; min-width: 100px; margin: 5px; }
-    .gifCat, .maklowicz,.crazyCat { width: 50px; height: 50px; }
+    .gifCat, .maklowicz { width: 50px; height: 50px; }
 }
 </style>
 </head>
@@ -114,37 +107,31 @@ function startApocalypse(){
 }
 
 function elementCount() {
-    return document.querySelectorAll(".heart, .cat, .meme, .gifCat, .maklowicz,.crazyCat").length;
+    return document.querySelectorAll(".heart, .gifCat, .maklowicz").length;
 }
 
-// KOTKI
+// KOTKI - tylko działające GIF-y
+const catGifUrls=[
+    "https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif",
+    "https://media.giphy.com/media/mlvseq9yvZhba/giphy.gif",
+    "https://media.giphy.com/media/13CoXDiaCcCoyk/giphy.gif",
+    "https://media.giphy.com/media/ICOgUNjpvO0PC/giphy.gif"
+];
+
 function createCatMemes(n=5){
     if(elementCount() + n > MAX_ELEMENTS) n = MAX_ELEMENTS - elementCount();
-    const cats=["😺","😻","😹","🐱"];
-    const gifUrls=[
-        "https://media.giphy.com/media/ICOgUNjpvO0PC/giphy.gif",
-        "https://media.giphy.com/media/mlvseq9yvZhba/giphy.gif",
-        "https://media.giphy.com/media/13CoXDiaCcCoyk/giphy.gif",
-        "https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif"
-    ];
     for(let i=0;i<n;i++){
-        let useGif = Math.random()<0.5;
-        let el=document.createElement(useGif?"img":"div");
-        if(useGif){
-            el.src = gifUrls[Math.floor(Math.random()*gifUrls.length)];
-            el.classList.add("gifCat","flyingObj");
-        } else {
-            el.classList.add("cat","flyingObj");
-            el.innerHTML = cats[Math.floor(Math.random()*cats.length)];
-        }
-        el.style.left = Math.random()*90+"vw";
-        el.style.top = Math.random()*80+"vh";
-        randomMotion(el);
-        document.body.appendChild(el);
+        let gif=document.createElement("img");
+        gif.src=catGifUrls[Math.floor(Math.random()*catGifUrls.length)];
+        gif.classList.add("gifCat","flyingObj");
+        gif.style.left=Math.random()*90+"vw";
+        gif.style.top=Math.random()*80+"vh";
+        randomMotion(gif);
+        document.body.appendChild(gif);
     }
 }
 
-// MAKŁOWICZ
+// MAKŁOWICZ - stabilne PNG/GIF
 const maklowiczUrls=[
     "https://i.imgur.com/6v2d0KQ.png",
     "https://i.imgur.com/7TfR6Ow.png",
@@ -168,55 +155,4 @@ function createMaklowiczMemes(n=5){
 function randomMotion(el){
     let x=Math.random()*200-100;
     let y=Math.random()*200-100;
-    el.animate([{transform:`translate(0,0)`},{transform:`translate(${x}px,${y}px)`}],
-               {duration:4000+Math.random()*4000,iterations:Infinity,direction:"alternate"});
-}
-
-// WYBUCH PO 2 SEKUNDACH
-function explodeLove() {
-    document.getElementById("boomSound").play();
-    const all = document.querySelectorAll(".heart, .cat, .meme, .gifCat, .maklowicz,.crazyCat");
-    all.forEach(el=>{
-        let x=(Math.random()-0.5)*800;
-        let y=(Math.random()-0.5)*800;
-        el.animate([{transform:"translate(0,0)",opacity:1},{transform:`translate(${x}px,${y}px) scale(2) rotate(${Math.random()*360}deg)`,opacity:0}],
-                    {duration:1000,easing:"ease-out"});
-        setTimeout(()=>el.remove(),1000);
-    });
-}
-
-// PRZYCISKI
-function moreChaos(){ // tylko kotki
-    startSaxophone();
-    document.getElementById("meowSound").play();
-    createCatMemes();
-    setTimeout(explodeLove,2000);
-}
-
-function megaChaos(){ // tylko Makłowicz
-    startSaxophone();
-    document.getElementById("meowSound").play();
-    createMaklowiczMemes();
-    setTimeout(explodeLove,2000);
-}
-
-function magicHearts(){ startSaxophone(); document.getElementById("meowSound").play(); createHearts(); setTimeout(explodeLove,2000);}
-function cosmicKiss(){ startSaxophone(); document.getElementById("cosmicSound").play(); alert("BUZIAK WYSŁANY W KOSMOS 🌌💖"); }
-function kissScreen(){ startSaxophone(); document.getElementById("kissSound").play(); alert("BUZIAK DLA NAJSŁODSZEGO CHŁOPAKA 💋💋💋"); }
-
-// DODATKOWY GENERATOR SERDUSZEK
-function createHearts(n=5){
-    if(elementCount() + n > MAX_ELEMENTS) n = MAX_ELEMENTS - elementCount();
-    for(let i=0;i<n;i++){
-        let heart=document.createElement("div");
-        heart.classList.add("heart","flyingObj");
-        heart.innerHTML="💖";
-        heart.style.left=Math.random()*90+"vw";
-        heart.style.top=Math.random()*80+"vh";
-        randomMotion(heart);
-        document.body.appendChild(heart);
-    }
-}
-</script>
-</body>
-</html>
+    el.animate([{transform:`translate(]()
