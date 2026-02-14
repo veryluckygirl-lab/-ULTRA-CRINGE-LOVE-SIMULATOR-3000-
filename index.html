@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>💖 EXTREME APOKALIPSA MIŁOŚCI 9003 💖</title>
+<title>💖 EXTREME APOKALIPSA MIŁOŚCI 9004 💖</title>
 
 <style>
 body {
@@ -29,7 +29,7 @@ button{
 }
 button:hover{transform:scale(1.2);}
 .hidden{display:none;}
-.heart,.cat,.meme,.confetti,.gifCat,.maklowicz{position:fixed;animation:fall linear infinite;}
+.heart,.cat,.meme,.confetti,.gifCat,.maklowicz{position:fixed;}
 .heart{font-size:28px;}
 .cat{font-size:48px;}
 .meme{font-size:64px;}
@@ -82,7 +82,7 @@ button:hover{transform:scale(1.2);}
 </div>
 
 <!-- Dźwięki -->
-<audio id="saxLove" autoplay loop>
+<audio id="saxLove" loop>
     <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
 </audio>
 <audio id="kissSound"><source src="https://www.soundjay.com/human/kiss-01.mp3" type="audio/mpeg"></audio>
@@ -93,9 +93,19 @@ button:hover{transform:scale(1.2);}
 <script>
 let counter=0;
 let interval;
+let saxStarted = false;
+const MAX_ELEMENTS = 150; // limit elementów latających
 
-// START: pokazuje tylko napisy i licznik, bez emotek
+function startSaxophone(){
+    if(!saxStarted){
+        document.getElementById("saxLove").play();
+        saxStarted = true;
+    }
+}
+
+// START: pokazuje tylko napisy i licznik
 function startApocalypse(){
+    startSaxophone();
     document.getElementById("loveZone").classList.remove("hidden");
     interval = setInterval(()=>{
         counter += 999999;
@@ -103,8 +113,13 @@ function startApocalypse(){
     }, 200);
 }
 
-// GENERATORY ELEMENTÓW
+// GENERATORY ELEMENTÓW Z LIMITEM
+function elementCount() {
+    return document.querySelectorAll(".heart, .cat, .meme, .gifCat, .maklowicz").length;
+}
+
 function createHearts(n){
+    if(elementCount() + n > MAX_ELEMENTS) n = MAX_ELEMENTS - elementCount();
     for(let i=0;i<n;i++){
         let heart=document.createElement("div");
         heart.classList.add("heart");
@@ -112,13 +127,27 @@ function createHearts(n){
         heart.style.left=Math.random()*90+"vw";
         heart.style.top=Math.random()*80+"vh";
         heart.style.color=`hsl(${Math.random()*360},100%,70%)`;
-        heart.style.animationDuration=(2+Math.random()*4)+"s";
         randomMotion(heart);
         document.body.appendChild(heart);
     }
 }
 
+function createCats(n){
+    if(elementCount() + n > MAX_ELEMENTS) n = MAX_ELEMENTS - elementCount();
+    const cats=["😺","😻","😹","🐱"];
+    for(let i=0;i<n;i++){
+        let cat=document.createElement("div");
+        cat.classList.add("cat");
+        cat.innerHTML=cats[Math.floor(Math.random()*cats.length)];
+        cat.style.left=Math.random()*90+"vw";
+        cat.style.top=Math.random()*80+"vh";
+        randomMotion(cat);
+        document.body.appendChild(cat);
+    }
+}
+
 function createMemes(n){
+    if(elementCount() + n > MAX_ELEMENTS) n = MAX_ELEMENTS - elementCount();
     const memes=["🐱‍👤","🐱‍💻","🐱‍🚀","😹💥"];
     for(let i=0;i<n;i++){
         let meme=document.createElement("div");
@@ -132,6 +161,7 @@ function createMemes(n){
 }
 
 function createGifCats(n){
+    if(elementCount() + n > MAX_ELEMENTS) n = MAX_ELEMENTS - elementCount();
     const gifUrls=[
         "https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif",
         "https://media.giphy.com/media/mlvseq9yvZhba/giphy.gif"
@@ -147,10 +177,10 @@ function createGifCats(n){
     }
 }
 
-// MEMY MAKŁOWICZA
 function createMaklowicz(n){
+    if(elementCount() + n > MAX_ELEMENTS) n = MAX_ELEMENTS - elementCount();
     const urls=[
-        "https://i.imgur.com/6v2d0KQ.png", // przykładowe memy Makłowicza
+        "https://i.imgur.com/6v2d0KQ.png",
         "https://i.imgur.com/7TfR6Ow.png"
     ];
     for(let i=0;i<n;i++){
@@ -164,19 +194,6 @@ function createMaklowicz(n){
     }
 }
 
-function createCats(n){
-    const cats=["😺","😻","😹","🐱"];
-    for(let i=0;i<n;i++){
-        let cat=document.createElement("div");
-        cat.classList.add("cat");
-        cat.innerHTML=cats[Math.floor(Math.random()*cats.length)];
-        cat.style.left=Math.random()*90+"vw";
-        cat.style.top=Math.random()*80+"vh";
-        randomMotion(cat);
-        document.body.appendChild(cat);
-    }
-}
-
 // LOSOWY RUCH
 function randomMotion(el){
     let x=Math.random()*200-100;
@@ -185,15 +202,10 @@ function randomMotion(el){
                {duration:4000+Math.random()*4000,iterations:Infinity,direction:"alternate"});
 }
 
-// EFEKT WYBUCHU PO 3 SEKUNDACH
+// WYBUCH PO 2 SEKUNDACH
 function explodeLove() {
     document.getElementById("boomSound").play();
-    const hearts = document.querySelectorAll(".heart");
-    const memes = document.querySelectorAll(".meme");
-    const gifs = document.querySelectorAll(".gifCat");
-    const maklowicz = document.querySelectorAll(".maklowicz");
-    const all = [...hearts, ...memes, ...gifs, ...maklowicz];
-
+    const all = document.querySelectorAll(".heart, .cat, .meme, .gifCat, .maklowicz");
     all.forEach(el => {
         let x = (Math.random() - 0.5) * 800;
         let y = (Math.random() - 0.5) * 800;
@@ -201,30 +213,16 @@ function explodeLove() {
             {transform: "translate(0,0)", opacity:1},
             {transform: `translate(${x}px, ${y}px) scale(2) rotate(${Math.random()*360}deg)`, opacity:0}
         ], {duration:1000, easing:"ease-out"});
-        setTimeout(()=>el.remove(), 1000);
+        setTimeout(()=>el.remove(),1000);
     });
 }
 
-// PRZYCISKI FUNKCJE
-function moreChaos(){
-    document.getElementById("meowSound").play(); // dźwięk miał
-    createHearts(30); createMemes(20); createGifCats(10); createMaklowicz(5);
-    setTimeout(explodeLove,3000);
-}
-
-function megaChaos(){
-    document.getElementById("meowSound").play();
-    createHearts(100); createCats(30); createMemes(30); createConfetti(50); createGifCats(20); createMaklowicz(10);
-    setTimeout(explodeLove,3000);
-}
-
-function magicHearts(){
-    document.getElementById("meowSound").play();
-    createHearts(50); setTimeout(explodeLove,3000);
-}
-
-function cosmicKiss(){ document.getElementById("cosmicSound").play(); alert("BUZIAK WYSŁANY W KOSMOS 🌌💖"); }
-function kissScreen(){ document.getElementById("kissSound").play(); alert("BUZIAK DLA NAJSŁODSZEGO CHŁOPAKA 💋💋💋"); }
+// PRZYCISKI
+function moreChaos(){ startSaxophone(); document.getElementById("meowSound").play(); createHearts(30); createMemes(20); createGifCats(10); createMaklowicz(5); setTimeout(explodeLove,2000);}
+function megaChaos(){ startSaxophone(); document.getElementById("meowSound").play(); createHearts(100); createCats(30); createMemes(30); createGifCats(20); createMaklowicz(10); setTimeout(explodeLove,2000);}
+function magicHearts(){ startSaxophone(); document.getElementById("meowSound").play(); createHearts(50); setTimeout(explodeLove,2000);}
+function cosmicKiss(){ startSaxophone(); document.getElementById("cosmicSound").play(); alert("BUZIAK WYSŁANY W KOSMOS 🌌💖"); }
+function kissScreen(){ startSaxophone(); document.getElementById("kissSound").play(); alert("BUZIAK DLA NAJSŁODSZEGO CHŁOPAKA 💋💋💋"); }
 
 </script>
 </body>
