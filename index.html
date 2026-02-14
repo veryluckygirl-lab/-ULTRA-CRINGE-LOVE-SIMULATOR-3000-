@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>💖 TOTALNA APOKALIPSA MIŁOŚCI 💖</title>
+
+<style>
+body {
+    margin: 0;
+    overflow: hidden;
+    background: linear-gradient(45deg, hotpink, deeppink, violet, magenta);
+    background-size: 400% 400%;
+    animation: bgMove 5s infinite alternate;
+    font-family: "Comic Sans MS", cursive;
+    text-align: center;
+    color: white;
+}
+
+@keyframes bgMove {
+    0% { background-position: left; }
+    100% { background-position: right; }
+}
+
+h1 {
+    margin-top: 40px;
+    font-size: 32px;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    50% { opacity: 0.3; }
+}
+
+button {
+    margin: 15px;
+    padding: 18px 35px;
+    font-size: 20px;
+    background: white;
+    color: hotpink;
+    border: 4px dashed deeppink;
+    border-radius: 50px;
+    cursor: pointer;
+}
+
+.hidden {
+    display: none;
+}
+
+.heart, .cat {
+    position: fixed;
+    top: -50px;
+    font-size: 28px;
+    animation: fall linear infinite;
+}
+
+@keyframes fall {
+    to { transform: translateY(110vh); }
+}
+
+.bigLove {
+    font-size: 36px;
+    margin-top: 20px;
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    50% { transform: scale(1.2); }
+}
+
+#loveCounter {
+    font-size: 26px;
+    margin-top: 20px;
+}
+
+.cat {
+    font-size: 48px;
+    animation-duration: 4s;
+}
+</style>
+</head>
+
+<body>
+
+<h1>🚨 UWAGA 🚨<br>MIŁOŚĆ PRZEKROCZYŁA DOPUSZCZALNE NORMY</h1>
+<p>System stabilności emocjonalnej: ZAWIESZONY</p>
+
+<button onclick="startApocalypse()">URUCHOM TOTALNĄ MIŁOŚĆ</button>
+<button onclick="kissScreen()">💋 POCAŁUJ EKRAN 💋</button>
+
+<div id="loveZone" class="hidden">
+
+    <div class="bigLove">
+        KOCHAM CIĘ TAK BARDZO  
+        ŻE TO JUŻ JEST NIELEGALNE 💖💖💖
+    </div>
+
+    <p style="font-size:22px;">
+        NIE MOGĘ BEZ CIEBIE ŻYĆ 😭
+    </p>
+
+    <p style="font-size:22px;">
+        JESTEŚ MOIM MISIEM, SŁONECZKIEM, KOTKIEM,
+        ANIOŁKIEM I NAJWIĘKSZYM SKARBEM 💘
+    </p>
+
+    <h2>👑 NAJLEPSZY CHŁOPAK WE WSZECHŚWIECIE 👑</h2>
+
+    <div id="loveCounter">
+        POZIOM MIŁOŚCI: 0%
+    </div>
+
+</div>
+
+<audio id="kissSound">
+<source src="https://www.soundjay.com/human/kiss-01.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+let counter = 0;
+let interval;
+
+function startApocalypse() {
+    document.getElementById("loveZone").classList.remove("hidden");
+
+    // licznik miłości
+    interval = setInterval(() => {
+        counter += 999999;
+        document.getElementById("loveCounter").innerText =
+            "POZIOM MIŁOŚCI: " + counter + "%";
+    }, 200);
+
+    // spadające serduszka
+    for (let i = 0; i < 100; i++) {
+        let heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.innerHTML = "💖";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.animationDuration = (2 + Math.random() * 3) + "s";
+        document.body.appendChild(heart);
+    }
+
+    // latające kotki / memy
+    const cats = ["😺", "😻", "😹", "🐱"];
+    for (let i = 0; i < 30; i++) {
+        let cat = document.createElement("div");
+        cat.classList.add("cat");
+        cat.innerHTML = cats[Math.floor(Math.random() * cats.length)];
+        cat.style.left = Math.random() * 100 + "vw";
+        cat.style.animationDuration = (3 + Math.random() * 4) + "s";
+        document.body.appendChild(cat);
+    }
+}
+
+function kissScreen() {
+    document.getElementById("kissSound").play();
+    alert("BUZIAK DLA NAJSŁODSZEGO CHŁOPAKA 💋💋💋");
+}
+</script>
+
+</body>
+</html>
