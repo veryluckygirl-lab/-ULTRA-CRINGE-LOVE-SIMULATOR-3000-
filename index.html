@@ -26,9 +26,25 @@ button:hover{transform:scale(1.2);}
 .meme{font-size:64px;}
 .confetti{width:10px;height:10px;background-color:yellow;}
 .gifCat{width:80px;height:80px;}
-.bigLove{font-size:40px;margin-top:20px;animation:pulse 1s infinite;}
+.bigLove{
+    font-size:40px;
+    margin-top:20px;
+    animation:pulse 1s infinite;
+    word-wrap: break-word;
+    line-height: 1.2;
+}
 @keyframes pulse{50%{transform:scale(1.3);}}
 #loveCounter{font-size:28px;margin-top:20px;}
+
+/* Responsywne style dla telefonów */
+@media (max-width: 600px) {
+    .bigLove { font-size: 24px; margin-top: 10px; }
+    #loveCounter { font-size: 20px; }
+    p { font-size: 16px; }
+    h2 { font-size: 18px; }
+    button { padding: 12px 25px; font-size: 16px; }
+    .gifCat { width: 50px; height: 50px; }
+}
 </style>
 </head>
 
@@ -60,16 +76,15 @@ button:hover{transform:scale(1.2);}
 <script>
 let counter=0;
 let interval;
-    
+
 function startApocalypse(){
-    document.getElementById("loveZone").classList.remove("hidden"); // pokaż napisy i licznik
+    document.getElementById("loveZone").classList.remove("hidden"); // tylko pokazuje napisy i licznik
     interval = setInterval(()=>{
         counter += 999999;
         document.getElementById("loveCounter").innerText = "POZIOM MIŁOŚCI: " + counter + "%";
     }, 200);
-    // UWAGA: NIE tworzymy żadnych emotek ani GIF-ów
+    // NIE tworzymy emotek ani GIF-ów
 }
-
 
 function createHearts(n){
     for(let i=0;i<n;i++){
@@ -160,5 +175,3 @@ function magicHearts(){createHearts(50);}
 
 </body>
 </html>
-
-
