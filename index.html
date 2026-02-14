@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>💖 EXTREME APOKALIPSA MIŁOŚCI 9005 💖</title>
+<title>💖 EXTREME APOKALIPSA MIŁOŚCI 9007 💖</title>
 
 <style>
 body {
@@ -29,6 +29,7 @@ button{
 }
 button:hover{transform:scale(1.2);}
 .hidden{display:none;}
+.flyingObj{position:fixed; transform: scale(0.8);}
 .heart,.cat,.meme,.confetti,.gifCat,.maklowicz,.crazyCat{position:fixed;}
 .heart{font-size:28px;}
 .cat{font-size:48px;}
@@ -116,79 +117,46 @@ function elementCount() {
     return document.querySelectorAll(".heart, .cat, .meme, .gifCat, .maklowicz,.crazyCat").length;
 }
 
-function createHearts(n){
-    if(elementCount() + n > MAX_ELEMENTS) n = MAX_ELEMENTS - elementCount();
-    for(let i=0;i<n;i++){
-        let heart=document.createElement("div");
-        heart.classList.add("heart");
-        heart.innerHTML="💖";
-        heart.style.left=Math.random()*90+"vw";
-        heart.style.top=Math.random()*80+"vh";
-        randomMotion(heart);
-        document.body.appendChild(heart);
-    }
-}
-
-function createCats(n){
+// KOTKI
+function createCatMemes(n=5){
     if(elementCount() + n > MAX_ELEMENTS) n = MAX_ELEMENTS - elementCount();
     const cats=["😺","😻","😹","🐱"];
+    const gifUrls=[
+        "https://media.giphy.com/media/ICOgUNjpvO0PC/giphy.gif",
+        "https://media.giphy.com/media/mlvseq9yvZhba/giphy.gif",
+        "https://media.giphy.com/media/13CoXDiaCcCoyk/giphy.gif",
+        "https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif"
+    ];
     for(let i=0;i<n;i++){
-        let cat=document.createElement("div");
-        cat.classList.add("cat");
-        cat.innerHTML=cats[Math.floor(Math.random()*cats.length)];
-        cat.style.left=Math.random()*90+"vw";
-        cat.style.top=Math.random()*80+"vh";
-        randomMotion(cat);
-        document.body.appendChild(cat);
+        let useGif = Math.random()<0.5;
+        let el=document.createElement(useGif?"img":"div");
+        if(useGif){
+            el.src = gifUrls[Math.floor(Math.random()*gifUrls.length)];
+            el.classList.add("gifCat","flyingObj");
+        } else {
+            el.classList.add("cat","flyingObj");
+            el.innerHTML = cats[Math.floor(Math.random()*cats.length)];
+        }
+        el.style.left = Math.random()*90+"vw";
+        el.style.top = Math.random()*80+"vh";
+        randomMotion(el);
+        document.body.appendChild(el);
     }
 }
 
-function createMemes(n){
-    if(elementCount() + n > MAX_ELEMENTS) n = MAX_ELEMENTS - elementCount();
-    const memes=["🐱‍👤","🐱‍💻","🐱‍🚀","😹💥"];
-    for(let i=0;i<n;i++){
-        let meme=document.createElement("div");
-        meme.classList.add("meme");
-        meme.innerHTML=memes[Math.floor(Math.random()*memes.length)];
-        meme.style.left=Math.random()*90+"vw";
-        meme.style.top=Math.random()*80+"vh";
-        randomMotion(meme);
-        document.body.appendChild(meme);
-    }
-}
-
-const gifUrls=[
-    "https://media.giphy.com/media/ICOgUNjpvO0PC/giphy.gif",
-    "https://media.giphy.com/media/mlvseq9yvZhba/giphy.gif",
-    "https://media.giphy.com/media/13CoXDiaCcCoyk/giphy.gif",
-    "https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif"
-];
-
-function createGifCats(n){
-    if(elementCount() + n > MAX_ELEMENTS) n = MAX_ELEMENTS - elementCount();
-    for(let i=0;i<n;i++){
-        let gif=document.createElement("img");
-        gif.src=gifUrls[Math.floor(Math.random()*gifUrls.length)];
-        gif.classList.add("gifCat");
-        gif.style.left=Math.random()*90+"vw";
-        gif.style.top=Math.random()*80+"vh";
-        randomMotion(gif);
-        document.body.appendChild(gif);
-    }
-}
-
+// MAKŁOWICZ
 const maklowiczUrls=[
     "https://i.imgur.com/6v2d0KQ.png",
     "https://i.imgur.com/7TfR6Ow.png",
     "https://i.imgur.com/pZcV3QJ.png"
 ];
 
-function createMaklowicz(n){
+function createMaklowiczMemes(n=5){
     if(elementCount() + n > MAX_ELEMENTS) n = MAX_ELEMENTS - elementCount();
     for(let i=0;i<n;i++){
         let m=document.createElement("img");
         m.src=maklowiczUrls[Math.floor(Math.random()*maklowiczUrls.length)];
-        m.classList.add("maklowicz");
+        m.classList.add("maklowicz","flyingObj");
         m.style.left=Math.random()*90+"vw";
         m.style.top=Math.random()*80+"vh";
         randomMotion(m);
@@ -196,24 +164,7 @@ function createMaklowicz(n){
     }
 }
 
-// Memy „kotek gryzący człowieka”
-const crazyCatUrls=[
-    "https://i.imgur.com/0VvE0Ue.gif", // przykładowy mem
-    "https://i.imgur.com/1Nz8JxF.gif"  // przykładowy mem
-];
-function createCrazyCat(n){
-    if(elementCount() + n > MAX_ELEMENTS) n = MAX_ELEMENTS - elementCount();
-    for(let i=0;i<n;i++){
-        let c=document.createElement("img");
-        c.src=crazyCatUrls[Math.floor(Math.random()*crazyCatUrls.length)];
-        c.classList.add("crazyCat");
-        c.style.left=Math.random()*90+"vw";
-        c.style.top=Math.random()*80+"vh";
-        randomMotion(c);
-        document.body.appendChild(c);
-    }
-}
-
+// LOSOWY RUCH
 function randomMotion(el){
     let x=Math.random()*200-100;
     let y=Math.random()*200-100;
@@ -221,6 +172,7 @@ function randomMotion(el){
                {duration:4000+Math.random()*4000,iterations:Infinity,direction:"alternate"});
 }
 
+// WYBUCH PO 2 SEKUNDACH
 function explodeLove() {
     document.getElementById("boomSound").play();
     const all = document.querySelectorAll(".heart, .cat, .meme, .gifCat, .maklowicz,.crazyCat");
@@ -234,12 +186,37 @@ function explodeLove() {
 }
 
 // PRZYCISKI
-function moreChaos(){ startSaxophone(); document.getElementById("meowSound").play(); createHearts(30); createMemes(20); createGifCats(10); createMaklowicz(5); createCrazyCat(5); setTimeout(explodeLove,2000);}
-function megaChaos(){ startSaxophone(); document.getElementById("meowSound").play(); createHearts(100); createCats(30); createMemes(30); createGifCats(20); createMaklowicz(10); createCrazyCat(10); setTimeout(explodeLove,2000);}
-function magicHearts(){ startSaxophone(); document.getElementById("meowSound").play(); createHearts(50); setTimeout(explodeLove,2000);}
+function moreChaos(){ // tylko kotki
+    startSaxophone();
+    document.getElementById("meowSound").play();
+    createCatMemes();
+    setTimeout(explodeLove,2000);
+}
+
+function megaChaos(){ // tylko Makłowicz
+    startSaxophone();
+    document.getElementById("meowSound").play();
+    createMaklowiczMemes();
+    setTimeout(explodeLove,2000);
+}
+
+function magicHearts(){ startSaxophone(); document.getElementById("meowSound").play(); createHearts(); setTimeout(explodeLove,2000);}
 function cosmicKiss(){ startSaxophone(); document.getElementById("cosmicSound").play(); alert("BUZIAK WYSŁANY W KOSMOS 🌌💖"); }
 function kissScreen(){ startSaxophone(); document.getElementById("kissSound").play(); alert("BUZIAK DLA NAJSŁODSZEGO CHŁOPAKA 💋💋💋"); }
 
+// DODATKOWY GENERATOR SERDUSZEK
+function createHearts(n=5){
+    if(elementCount() + n > MAX_ELEMENTS) n = MAX_ELEMENTS - elementCount();
+    for(let i=0;i<n;i++){
+        let heart=document.createElement("div");
+        heart.classList.add("heart","flyingObj");
+        heart.innerHTML="💖";
+        heart.style.left=Math.random()*90+"vw";
+        heart.style.top=Math.random()*80+"vh";
+        randomMotion(heart);
+        document.body.appendChild(heart);
+    }
+}
 </script>
 </body>
 </html>
